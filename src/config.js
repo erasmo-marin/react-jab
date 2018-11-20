@@ -55,6 +55,8 @@ const config = {
 			position: "bottom",
 			props: {
 				style: {
+					background: "red",
+					height: "100px"
 				}
 			},
 			children: {
