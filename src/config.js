@@ -1,8 +1,7 @@
-const specs = {
+const config = {
 	name:  "Hello World App",
 	version: "1.0.0",
 	title: "Hello World",
-	/*las rutas son componentes que cargan dependiendo de una ruta*/
 	routes: {
 		"/": {
 			id: "home",
@@ -37,7 +36,6 @@ const specs = {
 			}
 		}
 	},
-	/*los globals son componentes globales que no dependen de una ruta*/
 	globals: {
 		navbar: {
 			id: "navbar",
@@ -76,4 +74,4 @@ const specs = {
 	}
 }
 
-export default specs;
+export default config;
