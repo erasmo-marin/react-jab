@@ -1,27 +1,25 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Core, { Registry } from "./lib";
+import { BrowserRouter } from "react-router-dom";
+import Navbar from "./navbar";
+import Footer from "./footer";
+import About from "./about";
+import config from "./config";
+import "./style.css"
 
 class App extends Component {
+
+  constructor(props) {
+    super(props);
+    this.registry = new Registry({
+      "navbar": Navbar,
+      "footer": Footer,
+      "about": About
+    });
+  }
+
   render() {
-    return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Edit <code>src/App.js</code> and save to reload.
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+    return <Core registry={this.registry} config={config} router={BrowserRouter}/>
   }
 }
 
