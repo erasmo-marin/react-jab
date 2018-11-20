@@ -4,7 +4,8 @@ import map from "lodash/map";
 class Navbar extends React.Component {
 
 	goTo = transition => {
-		this.props.executeTransition(transition);
+		/*we always send customParam*/
+		this.props.executeTransition(transition, { customParam: new Date().toString() });
 	}
 
 	render() {

@@ -8,21 +8,22 @@ const config = {
 			title: "Home",
 			exact: true,
 			components: {
-
+				home: {
+					id: "home",
+					props: {
+						
+					}
+				}
 			}
 		},
-		"/about": {
+		"/about/:customParam?": {
 			id: "about",
 			title: "About",
 			components: {
 				about: {
 					id: "about",
 					props: {
-						style: {
-							marginTop: "50px",
-							padding: "2rem",
-							color: "rgba(0,0,0,0.7)"
-						}
+						
 					}
 				}
 			}
@@ -54,13 +55,21 @@ const config = {
 			id: "footer",
 			position: "bottom",
 			props: {
-				style: {
-					background: "red",
-					height: "100px"
-				}
-			},
-			children: {
-
+				title: "Footer title",
+				links: [
+					[
+						{text: "Link 1", url: "https://github.com"},
+					 	{text: "Link 2", "url": "https://microsoft.com"}
+					],
+					[
+						{text: "Link 3", url: "https://npmjs.com"},
+					 	{text: "Link 4", "url": "https://google.com"}
+					],
+					[
+						{text: "Link 5", url: "https://gitlab.com"},
+					 	{text: "Link 6", "url": "https://amazon.com"}
+					]
+				]
 			}
 		}
 	},
