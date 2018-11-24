@@ -1,4 +1,4 @@
-const specs = {
+const config = {
     name: 'Hello World App',
     version: '1.0.0',
     title: 'Hello World',
@@ -10,7 +10,7 @@ const specs = {
             exact: true,
             components: {
                 home: {
-                    id: 'asds',
+                    id: 'home',
                     props: {
                         title: 'Welcome to Jab',
                     },
@@ -89,9 +89,13 @@ const specs = {
             id: 'footer',
             position: 'bottom',
             props: {
-                style: {},
+                title: 'Footer title',
+                links: [
+                    [{ text: 'Link 1', url: 'https://github.com' }, { text: 'Link 2', url: 'https://microsoft.com' }],
+                    [{ text: 'Link 3', url: 'https://npmjs.com' }, { text: 'Link 4', url: 'https://google.com' }],
+                    [{ text: 'Link 5', url: 'https://gitlab.com' }, { text: 'Link 6', url: 'https://amazon.com' }],
+                ],
             },
-            children: {},
         },
     },
     transitions: {
@@ -106,4 +110,4 @@ const specs = {
     },
 }
 
-export default specs
+export default config

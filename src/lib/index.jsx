@@ -1,22 +1,23 @@
 import React from 'react'
 import { Route, Switch } from 'react-router'
-import { configure } from 'mobx'
 import { Provider } from 'mobx-react'
-//import DevTools from "mobx-react-devtools";
 import map from 'lodash/map'
 import filter from 'lodash/filter'
-//import get from "lodash/get";
+import get from 'lodash/get'
 import Registry from './registry'
 import Component from './component'
 import coreStore from './store'
-
-configure({ enforceActions: 'always' })
 
 class Core extends React.Component {
     constructor(props) {
         super(props)
         const { config = {} } = this.props
         coreStore.setConfig(config)
+        this.setTitle(get(config, 'title', ''))
+    }
+
+    setTitle = title => {
+        if (window.document) window.document.title = title
     }
 
     render() {
@@ -27,9 +28,7 @@ class Core extends React.Component {
             ...this.props.stores,
         }
 
-        window.stores = stores
         const Router = router
-
         const bottom = filter(config.globals, ({ position }) => position === 'bottom')
         const top = filter(config.globals, ({ position }) => position === 'top')
 
@@ -91,7 +90,6 @@ class Core extends React.Component {
                         })}
                     </React.Fragment>
                 </Router>
-                {/*<DevTools/>*/}
             </Provider>
         )
     }
