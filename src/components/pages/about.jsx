@@ -1,11 +1,20 @@
-import React from 'react'
+import React from 'react';
+import get from 'lodash/get';
 
 class About extends React.Component {
     render() {
-        const { executeTransition, ...rest } = this.props
+        const { executeTransition, coreStore, registry, ...rest } = this.props;
 
         return (
-            <div {...rest}>
+            <div
+                {...rest}
+                style={{
+                    backgroundColor: get(coreStore, 'theme.colors.backgroundColor', '#fff'),
+                    overflow: 'auto',
+                    padding: '4rem',
+                }}
+                className="content"
+            >
                 <p>
                     Json App Builder (JAB) is a way to build apps, reusing code and saving time. Just imagine that you
                     can build a website from a set of components just using a json configuration. All this is possible
@@ -16,8 +25,8 @@ class About extends React.Component {
                     preferences, change the UI remotely without reloading, build a component library, etc.
                 </p>
             </div>
-        )
+        );
     }
 }
 
-export default About
+export default About;

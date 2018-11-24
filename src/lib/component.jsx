@@ -1,19 +1,19 @@
-import React from 'react'
-import { inject } from 'mobx-react'
-import map from 'lodash/map'
+import React from 'react';
+import { inject } from 'mobx-react';
+import map from 'lodash/map';
 
 class Component extends React.Component {
     render() {
-        const { registry = false, id = false, props, coreStore, components } = this.props
+        const { registry = false, id = false, props, coreStore, components } = this.props;
 
         if (!registry || !registry.get) {
-            console.warn(`There was a problem trying to load component with key ${id}`)
-            return null
+            console.warn(`There was a problem trying to load component with key ${id}`);
+            return null;
         }
 
-        const C = registry.get(id)
+        const C = registry.get(id);
 
-        if (!C) return null
+        if (!C) return null;
 
         return (
             <C {...props} executeTransition={coreStore.executeTransition} registry={registry} coreStore={coreStore}>
@@ -29,10 +29,10 @@ class Component extends React.Component {
                     />
                 ))}
             </C>
-        )
+        );
     }
 }
 
-Component = inject('coreStore')(Component)
+Component = inject('coreStore')(Component);
 
-export default Component
+export default Component;

@@ -9,13 +9,6 @@ html, body, #root {
 	overflow: auto;
 }
 
-.container {
-	padding: 4rem;
-	box-sizing: border-box;
-	color: rgba(0,0,0,0.7);
-	margin-top: 60px;
-}
-
 .navbar {
 	position: fixed;
 	background: white;
@@ -70,7 +63,6 @@ html, body, #root {
 
 .content {
 	margin-top: 64px;
-	margin-bottom: 150px;
 }
 
 .navbar .navbar-link {

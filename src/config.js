@@ -2,7 +2,19 @@ const config = {
     name: 'Hello World App',
     version: '1.0.0',
     title: 'Hello World',
-    /*las rutas son componentes que cargan dependiendo de una ruta*/
+    theme: {
+        colors: {
+            backgroundColor: '#f5f5f6',
+            primaryColor: '#d81b60',
+            primaryLightColor: '#ff5c8d',
+            primaryDarkColor: '#a00037',
+            secondaryColor: '#3f51b5',
+            secondaryLightColor: '#757de8',
+            secondaryDarkColor: '#002984',
+            primaryTextColor: '#ffffff',
+            secondaryTextColor: '#ffffff',
+        },
+    },
     routes: {
         '/': {
             id: 'home',
@@ -67,7 +79,6 @@ const config = {
             components: {},
         },
     },
-    /*los globals son componentes globales que no dependen de una ruta*/
     globals: {
         navbar: {
             id: 'navbar',
@@ -108,6 +119,6 @@ const config = {
             to: 'about',
         },
     },
-}
+};
 
-export default config
+export default config;

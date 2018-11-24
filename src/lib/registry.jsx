@@ -1,11 +1,11 @@
 class Registry {
     constructor(components = {}) {
-        this.components = components
+        this.components = components;
     }
 
     get = id => {
-        return this.components[id] || null
-    }
+        return this.components[id] || null;
+    };
 }
 
-export default Registry
+export default Registry;
