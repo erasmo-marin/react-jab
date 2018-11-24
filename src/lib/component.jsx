@@ -1,23 +1,38 @@
-import React from "react";
-import { inject } from "mobx-react"; 
+import React from 'react'
+import { inject } from 'mobx-react'
+import map from 'lodash/map'
 
 class Component extends React.Component {
-	render() {
+    render() {
+        const { registry = false, id = false, props, coreStore, components } = this.props
 
-		const { registry = false, id = false, props, coreStore } = this.props;
+        if (!registry || !registry.get) {
+            console.warn(`There was a problem trying to load component with key ${id}`)
+            return null
+        }
 
-		if(!registry || !registry.get) {
-			return <div style={{ color: "red" }}>
-						{`There was a problem trying to load component with key ${id}`}
-				   </div>;
-		}
+        const C = registry.get(id)
 
-		const C = registry.get(id);
+        if (!C) return null
 
-		return <C {...props} executeTransition={coreStore.executeTransition}/>
-	}
+        return (
+            <C {...props} executeTransition={coreStore.executeTransition} registry={registry} coreStore={coreStore}>
+                {/*Recursively build components tree so we can add all components levels we want from config*/
+                map(components, ({ components, id, props }, index) => (
+                    <Component
+                        key={index}
+                        id={id}
+                        props={props}
+                        registry={registry}
+                        components={components}
+                        coreStore={coreStore}
+                    />
+                ))}
+            </C>
+        )
+    }
 }
 
-Component = inject("coreStore")(Component);
+Component = inject('coreStore')(Component)
 
-export default Component;
+export default Component

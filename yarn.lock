@@ -7795,15 +7795,7 @@ react-router-dom@^4.3.1:
     react-router "^4.3.1"
     warning "^4.0.1"
 
-react-router-native@^4.3.0:
-  version "4.3.0"
-  resolved "https://registry.yarnpkg.com/react-router-native/-/react-router-native-4.3.0.tgz#4ad821f0543a96694d8ec4ee735a299e330181a1"
-  integrity sha512-G+djpkW0zMs7iNgL33uHTsNOmkhl0NxHYzGaG/C4G3dCNV4RPg20OLvTHHiZ20X9921sq98nPfTNAjCHNrGYjw==
-  dependencies:
-    prop-types "^15.6.1"
-    react-router "^4.3.0"
-
-react-router@^4.3.0, react-router@^4.3.1:
+react-router@^4.3.1:
   version "4.3.1"
   resolved "https://registry.yarnpkg.com/react-router/-/react-router-4.3.1.tgz#aada4aef14c809cb2e686b05cee4742234506c4e"
   integrity sha512-yrvL8AogDh2X42Dt9iknk4wF4V8bWREPirFfS9gLU1huk6qK41sg7Z/1S81jjTrGHxa3B8R3J6xIkDAA6CVarg==
