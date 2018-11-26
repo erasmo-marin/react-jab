@@ -7,6 +7,7 @@ import get from 'lodash/get';
 import Registry from './registry';
 import Component from './component';
 import coreStore from './store';
+import isConfigurable from "./isConfigurable";
 
 class Core extends React.Component {
     constructor(props) {
@@ -97,4 +98,4 @@ class Core extends React.Component {
 }
 
 export default Core;
-export { Registry, Component };
+export { Registry, Component, isConfigurable };
