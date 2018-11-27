@@ -22,9 +22,13 @@ const config = {
             exact: true,
             components: {
                 home: {
-                    id: 'home',
+                    id: 'container',
                     props: {
                         title: 'Welcome to Jab',
+                        style: {
+                            marginTop: "64px",
+                            padding: "2rem 0"
+                        }
                     },
                     components: {
                         grid: {
