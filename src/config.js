@@ -27,30 +27,71 @@ const config = {
                         title: 'Welcome to Jab',
                     },
                     components: {
-                        card1: {
-                            id: 'card',
+                        grid: {
+                            id: "grid",
                             props: {
-                                title: 'Card 1',
-                                description:
-                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                                configurable: true
+                                centered: true
                             },
-                        },
-                        card2: {
-                            id: 'card',
-                            props: {
-                                title: 'Card 2',
-                                description:
-                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                            },
-                        },
-                        card3: {
-                            id: 'card',
-                            props: {
-                                title: 'Card 3',
-                                description:
-                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
-                            },
+                            components: [{
+                                    id: "grid.column",
+                                    components: [{
+                                            id: 'card',
+                                            props: {
+                                                title: 'Card 1',
+                                                description:
+                                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                                                configurable: true
+                                            },
+                                    }],
+                                    props: {
+                                        width: 4
+                                    }
+                                },
+                                {
+                                    id: "grid.column",
+                                    components: [{
+                                            id: 'card',
+                                            props: {
+                                                title: 'Card 2',
+                                                description:
+                                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                                                configurable: true
+                                            },
+                                    }],
+                                    props: {
+                                        width: 4
+                                    }
+                                },
+                                {
+                                    id: "grid.column",
+                                    components: [{
+                                            id: 'card',
+                                            props: {
+                                                title: 'Card 3',
+                                                description:
+                                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                                                configurable: true
+                                            },
+                                    }],
+                                    props: {
+                                        width: 4
+                                    }
+                                },
+                                {
+                                    id: "grid.column",
+                                    components: [{
+                                            id: 'card',
+                                            props: {
+                                                title: 'Card 4',
+                                                description:
+                                                    'Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.',
+                                                configurable: true
+                                            },
+                                    }],
+                                    props: {
+                                        width: 4
+                                    }
+                                }],
                         },
                     },
                 },

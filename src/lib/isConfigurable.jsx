@@ -16,25 +16,35 @@ import "./semantic.min.css";
 	}]
 */
 
+const configureStyles = `
+	.toggle-configure-form {
+		position: absolute;
+		right: 0;
+		top: 0;
+		z-index: 999;
+	}
+`;
+
 
 const inputTypes = {
 	input: Form.Input,
-	select: Form.Select
+	select: Form.Select,
+	textarea: Form.TextArea
 }
 
-const isConfigurable = (WrappedComponent, options, CustomOptionsComponent = false, style = {}) => {
+const isConfigurable = (WrappedComponent, options, Container = React.Fragment, containerProps = {}, CustomOptionsComponent = false) => {
 
 	return class extends React.Component {
 		constructor(props) {
 			super(props);
 			this.options = options;
-			this.configurations = {};
+			this.configurations = { ...this.props };
 			this.state = {
 				configure: true,
 				generatedProps: {}
 			}
-			this.containerClassName = style.containerClassName;
-			this.containerStyle = style.containerStyle;
+			this.container = Container;
+			this.containerProps = containerProps;
 			console.log(this.options);
 		}
 
@@ -64,12 +74,14 @@ const isConfigurable = (WrappedComponent, options, CustomOptionsComponent = fals
 							const C = inputTypes[option.type];
 							if(!C)
 								return null;
+
 							return <Form.Field>
 										<C
 											label={option.label || option.name}
 											name={option.name}
 											options={this.mapValues(option.values)}
 											onChange={(e, { name, value }) => this.setField(name, value)}
+											defaultValue={this.configurations[option.name] || undefined}
 										/>
 									</Form.Field>
 						})
@@ -84,21 +96,29 @@ const isConfigurable = (WrappedComponent, options, CustomOptionsComponent = fals
 			this.configurations = configurations;
 		}
 
+		getToggleButton = () => {
+			return (<div className="toggle-configure-form">
+								<Icon name="eye" onClick={this.toggleConfigure}/>
+							</div>)
+		}
+
 		render() {
 
 			const { generatedProps, configure = false } = this.state;
 			const { configurable = false, ...rest } = this.props;
+			const Container = this.container;
 
-			if(configurable)
-				return <div className={this.containerClassName} style={this.containerStyle}>
-							<div className="toggle-configure-form">
-								<Icon name="eye" onClick={this.toggleConfigure}/>
-							</div>
-							{ configure ? 
-								(this.getDynamicForm())
-								: 
-								(<WrappedComponent {...rest} {...generatedProps}/>)}
-						</div>
+			if(configurable && configure)
+				return <Container {...this.containerProps}>
+							<style>{configureStyles}</style>
+							{this.getToggleButton()}
+							{this.getDynamicForm()}
+						</Container>
+			if(configurable && !configure)
+				return  (<React.Fragment>
+							<style>{configureStyles}</style>
+							<WrappedComponent {...rest} {...generatedProps} toggleConfigurationButton={this.getToggleButton()}/>
+						 </React.Fragment>);
 
 			return <WrappedComponent {...this.props}/>
 		}

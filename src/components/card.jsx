@@ -1,51 +1,46 @@
 import React from 'react';
+import { Card as SemanticCard } from "semantic-ui-react";
 import isConfigurable from "../lib/isConfigurable";
-
-const configureStyles = `
-	.toggle-configure-form {
-		position: absolute;
-		right: 0;
-		top: 0;
-	}
-`;
-
 
 class Card extends React.Component {
     render() {
-        const { title, description } = this.props;
+        const { title, description, toggleConfigurationButton = null } = this.props;
 
         return (
-            <div className="card">
-            	<style>{configureStyles}</style>
-                <h3>{title}</h3>
-                <p>{description}</p>
-            </div>
+            <SemanticCard style={{ width: "100%" }}>
+            	{ toggleConfigurationButton }
+            	<SemanticCard.Content>
+	                <SemanticCard.Header>{title}</SemanticCard.Header>
+	                <SemanticCard.Description>{description}</SemanticCard.Description>
+	            </SemanticCard.Content>
+            </SemanticCard>
         );
     }
 }
 
-Card = isConfigurable(Card, [{
-	name: "title",
-	label: "Title",
-	type: "input"
-},{
-	name: "description",
-	label: "Description",
-	type: "input"
-}], null, {
-	containerStyle: {
-		display: "inline-block",
-		position: "relative",
-		border: "1px solid #dedede",
-		borderRadius: "2px",
-		margin: "1rem",
-		padding: "2rem",
-		width: "300px",
-		height: "200px",
-		boxSizing: "borderBox",
-		background: "#fff",
-    	boxShadow: "0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24)"
-	}
-});
+
+const fields = [{
+					name: "title",
+					label: "Title",
+					type: "input"
+				},{
+					name: "description",
+					label: "Description",
+					type: "textarea"
+				}];
+
+const containerProps = {
+	style: { width: "100%" }
+}
+
+const Container = (props) => (
+	<SemanticCard {...props}>
+		<SemanticCard.Content>
+			{props.children}
+		</SemanticCard.Content>
+	</SemanticCard>
+)
+
+Card = isConfigurable(Card, fields, Container, containerProps);
 
 export default Card;

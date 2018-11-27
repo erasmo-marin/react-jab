@@ -8,6 +8,7 @@ import Home from './components/pages/home';
 import Card from './components/card';
 import config from './config';
 import './style.css';
+import { Grid } from "semantic-ui-react";
 
 class App extends Component {
     constructor(props) {
@@ -18,6 +19,9 @@ class App extends Component {
             about: About,
             home: Home,
             card: Card,
+            grid: Grid,
+            "grid.column": Grid.Column,
+            "grid.row": Grid.Row
         });
     }
 
