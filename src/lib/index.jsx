@@ -7,7 +7,7 @@ import get from 'lodash/get';
 import Registry from './registry';
 import Component from './component';
 import coreStore from './store';
-import isConfigurable from "./isConfigurable";
+import { isConfigurable } from "./configuration";
 
 class Core extends React.Component {
     constructor(props) {

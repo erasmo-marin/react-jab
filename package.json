@@ -16,6 +16,8 @@
     "@babel/preset-env": "^7.1.6",
     "@babel/preset-react": "^7.0.0",
     "babel-preset-react-app": "^6.1.0",
+    "react-color": "^2.14.1",
+    "react-color-picker": "^4.0.2",
     "react-router": "^4.3.1",
     "react-router-dom": "^4.3.1",
     "react-scripts": "^2.1.1",

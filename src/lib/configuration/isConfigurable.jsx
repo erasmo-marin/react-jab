@@ -2,6 +2,7 @@ import React from "react";
 import map from "lodash/map";
 import cloneDeep from "lodash/cloneDeep";
 import { Form, Button, Icon } from "semantic-ui-react";
+import Color from './color';
 import "./semantic.min.css";
 
 /* options example:
@@ -21,7 +22,7 @@ const configureStyles = `
 		position: absolute;
 		right: 0;
 		top: 0;
-		z-index: 999;
+		z-index: 99;
 	}
 `;
 
@@ -29,7 +30,8 @@ const configureStyles = `
 const inputTypes = {
 	input: Form.Input,
 	select: Form.Select,
-	textarea: Form.TextArea
+	textarea: Form.TextArea,
+	color: Color
 }
 
 const isConfigurable = (WrappedComponent, options, Container = React.Fragment, containerProps = {}, CustomOptionsComponent = false) => {
@@ -58,11 +60,6 @@ const isConfigurable = (WrappedComponent, options, Container = React.Fragment, c
 			this.configurations[name] = value;
 		}
 
-		mapValues = (values) => map(values, value => ({
-			text: value,
-			value
-		}));
-
 		getDynamicForm = () => {
 			if(CustomOptionsComponent)
 				return <CustomOptionsComponent onFormChange={this.onFormChange} onSubmit={this.commitChanges}/>;
@@ -79,7 +76,7 @@ const isConfigurable = (WrappedComponent, options, Container = React.Fragment, c
 										<C
 											label={option.label || option.name}
 											name={option.name}
-											options={this.mapValues(option.values)}
+											options={option.values}
 											onChange={(e, { name, value }) => this.setField(name, value)}
 											defaultValue={this.configurations[option.name] || undefined}
 										/>
@@ -98,8 +95,8 @@ const isConfigurable = (WrappedComponent, options, Container = React.Fragment, c
 
 		getToggleButton = () => {
 			return (<div className="toggle-configure-form">
-								<Icon name="eye" onClick={this.toggleConfigure}/>
-							</div>)
+						<Icon name="eye" onClick={this.toggleConfigure}/>
+					</div>)
 		}
 
 		render() {
