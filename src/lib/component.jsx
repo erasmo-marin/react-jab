@@ -1,10 +1,10 @@
 import React from 'react';
-import { inject } from 'mobx-react';
 import map from 'lodash/map';
+import jabCore from './core';
 
 class Component extends React.Component {
     render() {
-        const { registry = false, id = false, props, coreStore, components } = this.props;
+        const { registry = false, id = false, props, components, core = jabCore } = this.props;
 
         if (!registry || !registry.get) {
             console.warn(`There was a problem trying to load component with key ${id}`);
@@ -16,7 +16,7 @@ class Component extends React.Component {
         if (!C) return null;
 
         return (
-            <C {...props} executeTransition={coreStore.executeTransition} registry={registry} coreStore={coreStore}>
+            <C {...props} executeTransition={core.executeTransition} registry={registry} core={core}>
                 {/*Recursively build components tree so we can add all components levels we want from config*/
                 map(components, ({ components, id, props }, index) => (
                     <Component
@@ -25,14 +25,12 @@ class Component extends React.Component {
                         props={props}
                         registry={registry}
                         components={components}
-                        coreStore={coreStore}
+                        core={core}
                     />
                 ))}
             </C>
         );
     }
 }
-
-Component = inject('coreStore')(Component);
 
 export default Component;

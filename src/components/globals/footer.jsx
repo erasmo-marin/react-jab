@@ -4,13 +4,13 @@ import get from 'lodash/get';
 
 class Footer extends React.Component {
     render() {
-        const { executeTransition, title, links, coreStore, registry, ...rest } = this.props;
+        const { executeTransition, title, links, core, registry, ...rest } = this.props;
         return (
             <div
                 {...rest}
                 style={{
-                    backgroundColor: get(coreStore, 'theme.colors.primaryColor', '#fff'),
-                    color: get(coreStore, 'theme.colors.primaryTextColor', '#000'),
+                    backgroundColor: get(core, 'theme.colors.primaryColor', '#fff'),
+                    color: get(core, 'theme.colors.primaryTextColor', '#000'),
                 }}
                 className="footer"
             >

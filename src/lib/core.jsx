@@ -1,25 +1,26 @@
-import { observable, action, decorate } from 'mobx';
 import get from 'lodash/get';
 import forEach from 'lodash/forEach';
 import findKey from 'lodash/findKey';
 
 /*The default store for json app builder*/
-class CoreStore {
-    config = {};
-    transitions = {};
-    theme = {};
-    router = false;
+class JabCore {
+    constructor() {
+        this.config = {};
+        this.transitions = {};
+        this.theme = {};
+        this.router = false;
+    }
 
     setRouter = router => {
         this.router = router;
     };
 
-    setConfig(config = {}) {
+    setConfig = (config = {}) => {
         this.transitions = get(config, 'transitions', {});
         this.config = config;
     }
 
-    setTheme(theme = {}) {
+    setTheme = (theme = {}) => {
         this.theme = theme;
     }
 
@@ -35,7 +36,7 @@ class CoreStore {
     };
 
     /*This will execute a transition to another route*/
-    executeTransition(transitionName, params = {}) {
+    executeTransition = (transitionName, params = {}) => {
         const routes = get(this.config, 'routes');
         const transition = get(this.config, `transitions[${transitionName}]`);
         let route = findKey(routes, { id: get(transition, 'to') });
@@ -50,13 +51,5 @@ class CoreStore {
     }
 }
 
-decorate(CoreStore, {
-    config: observable,
-    transitions: observable,
-    setConfig: action.bound,
-    setTheme: action.bound,
-    addTransitionListener: action.bound,
-    executeTransition: action.bound,
-});
 
-export default new CoreStore();
+export default new JabCore();
