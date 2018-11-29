@@ -11,6 +11,7 @@ import './style.css';
 import { Grid, Container } from "semantic-ui-react";
 import forEach from "lodash/forEach";
 import get from "lodash/get";
+import cloneDeep from "lodash/cloneDeep";
 
 class App extends Component {
     constructor(props) {
@@ -26,6 +27,14 @@ class App extends Component {
             "grid.row": Grid.Row,
             container: Container
         });
+        this.config = JSON.parse(localStorage.getItem("config")) || cloneDeep(config);
+    }
+
+    componentDidMount() {
+        setInterval(() => {
+            console.log(this.getUpdatedConfig());
+            localStorage.setItem("config", this.configToString());
+        }, 1000);
     }
 
     updateComponentDeep(components) {
@@ -45,14 +54,23 @@ class App extends Component {
         });
     }
 
+    configToString() {
+        return JSON.stringify(this.getUpdatedConfig(), (key, value) => {
+            if(key === "ref") {
+                return;
+            }
+            return value;
+        });
+    }
+
     getUpdatedConfig = () => {
-        this.updateComponentDeep(config.routes);
-        this.updateComponentDeep(config.globals);
-        return config;
+        this.updateComponentDeep(this.config.routes);
+        this.updateComponentDeep(this.config.globals);
+        return this.config;
     }
 
     render() {
-        return <Core registry={this.registry} config={config} router={BrowserRouter} />;
+        return <Core registry={this.registry} config={this.config} router={BrowserRouter} />;
     }
 }
 
