@@ -1,5 +1,6 @@
 import React from "react";
 import map from "lodash/map";
+import forEach from "lodash/forEach";
 import cloneDeep from "lodash/cloneDeep";
 import { Form, Button, Icon } from "semantic-ui-react";
 import Color from './color';
@@ -36,18 +37,20 @@ const inputTypes = {
 
 const isConfigurable = (WrappedComponent, options, Container = React.Fragment, containerProps = {}, CustomOptionsComponent = false) => {
 
-	return class extends React.Component {
+	return class ConfigurableComponent extends React.Component {
 		constructor(props) {
 			super(props);
 			this.options = options;
-			this.configurations = { ...this.props };
+			this.configurations = {};
+			forEach(this.options, ({ name }) => {
+				this.configurations[name] = this.props[name];
+			});
 			this.state = {
 				configure: true,
 				generatedProps: {}
 			}
 			this.container = Container;
 			this.containerProps = containerProps;
-			console.log(this.options);
 		}
 
 		toggleConfigure = () => this.setState({ configure: !this.state.configure });
@@ -99,6 +102,10 @@ const isConfigurable = (WrappedComponent, options, Container = React.Fragment, c
 					</div>)
 		}
 
+		getConfigurableProps = () => {
+			return this.configurations;
+		}
+
 		render() {
 
 			const { generatedProps, configure = false } = this.state;
@@ -114,10 +121,10 @@ const isConfigurable = (WrappedComponent, options, Container = React.Fragment, c
 			if(configurable && !configure)
 				return  (<React.Fragment>
 							<style>{configureStyles}</style>
-							<WrappedComponent {...rest} {...generatedProps} toggleConfigurationButton={this.getToggleButton()}/>
+							<WrappedComponent {...rest} {...generatedProps} getConfigurableProps={this.getConfigurableProps} toggleConfigurationButton={this.getToggleButton()}/>
 						 </React.Fragment>);
 
-			return <WrappedComponent {...this.props}/>
+			return <WrappedComponent {...this.props} getConfigurableProps={this.getConfigurableProps}/>
 		}
 	}
 };

@@ -9,6 +9,8 @@ import Card from './components/card';
 import config from './config';
 import './style.css';
 import { Grid, Container } from "semantic-ui-react";
+import forEach from "lodash/forEach";
+import get from "lodash/get";
 
 class App extends Component {
     constructor(props) {
@@ -24,6 +26,29 @@ class App extends Component {
             "grid.row": Grid.Row,
             container: Container
         });
+    }
+
+    updateComponentDeep(components) {
+
+        if(!components)
+            return;
+
+        forEach(components, component => {
+            this.updateComponentDeep(get(component, "components"));
+            const getProps = get(component, "ref.ComponentRef.getConfigurableProps", false);
+            if(getProps) {
+                component.props = {
+                    ...component.props,
+                    ...getProps()
+                };
+            }
+        });
+    }
+
+    getUpdatedConfig = () => {
+        this.updateComponentDeep(config.routes);
+        this.updateComponentDeep(config.globals);
+        return config;
     }
 
     render() {

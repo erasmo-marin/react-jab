@@ -3,13 +3,13 @@ import get from 'lodash/get';
 
 class About extends React.Component {
     render() {
-        const { executeTransition, coreStore, registry, ...rest } = this.props;
+        const { executeTransition, core, registry, ...rest } = this.props;
 
         return (
             <div
                 {...rest}
                 style={{
-                    backgroundColor: get(coreStore, 'theme.colors.backgroundColor', '#fff'),
+                    backgroundColor: get(core, 'theme.colors.backgroundColor', '#fff'),
                     overflow: 'auto',
                     padding: '4rem',
                 }}
